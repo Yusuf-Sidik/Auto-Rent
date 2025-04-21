@@ -32,6 +32,7 @@ class LoginFragment : Fragment() {
             parentFragmentManager.beginTransaction().replace(R.id.containere, RegisterFragment()).commit()
         }
 
+
         binding.btnSubmit.setOnClickListener {
             val preferences : SharedPreferences = requireContext().getSharedPreferences("MYPREF",android.content.Context.MODE_PRIVATE)
             val username = binding.loginEdtUsername.text.toString()
