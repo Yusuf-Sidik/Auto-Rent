@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rentalpetik.R
 import com.example.rentalpetik.databinding.FragmentAkunBinding
+import com.example.rentalpetik.ui.LoginRegist.LoginRegisActivity
 
 class AkunFragment : Fragment() {
 
@@ -62,8 +63,9 @@ class AkunFragment : Fragment() {
                 val editor : SharedPreferences.Editor = preferences.edit()
                 editor.putBoolean("isLoggedIn",false)
                 editor.apply()
-
-                findNavController().navigate(R.id.action_navigation_account_to_loginRegisActivity)
+                startActivity(Intent(requireActivity(), LoginRegisActivity::class.java))
+                requireActivity().finish()
+//                findNavController().navigate(R.id.action_navigation_account_to_loginRegisActivity)
             }
             alertDialog.setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
