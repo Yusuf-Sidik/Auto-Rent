@@ -65,9 +65,11 @@ class RegisterFragment : Fragment() {
                         // Simpan status login
                         val sharedPreferences: SharedPreferences = requireActivity()
                             .getSharedPreferences("MYPREF", MODE_PRIVATE)
+
                         val editor: SharedPreferences.Editor = sharedPreferences.edit()
                         editor.putBoolean("isLoggedIn", true)
                         editor.putString("USERNAME", username)
+                        editor.putString("EMAIL", email)
                         editor.apply()
 
                         Toast.makeText(requireContext(), "Registrasi Berhasil", Toast.LENGTH_SHORT).show()
