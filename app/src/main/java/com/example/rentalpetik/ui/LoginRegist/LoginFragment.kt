@@ -44,12 +44,7 @@ class LoginFragment : Fragment() {
                 editor.apply()
                 startActivity(Intent(requireActivity(), MainActivity::class.java))
             } else {
-                if (username.isEmpty() || pass.isEmpty()) {
-                    Toast.makeText(requireContext(), "Semua kolom harus diisi", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                } else {
-                    Toast.makeText(requireContext(), "Username atau Password salah!", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(requireContext(), "Username atau Password salah!", Toast.LENGTH_SHORT).show()
             }
         }
     }
