@@ -5,4 +5,11 @@
     <string name="title_history">History</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="kendaraan_options">
+        <item>Pilih Kendaraan</item>
+        <item>Motor Blade</item>
+        <item>Motor Vario</item>
+    </string-array>
+    <string name="pilih_kendaraan">Pilih Kendaraan</string>
 </resources>

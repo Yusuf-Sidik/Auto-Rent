@@ -56,18 +56,11 @@ class AkunFragment : Fragment() {
             alertDialog.setTitle("Logout")
             alertDialog.setMessage("Apakah anda ingin Logout")
             alertDialog.setPositiveButton("Iya") { dialog, which ->
-//                val preferences : SharedPreferences = requireContext().getSharedPreferences("MYPREF",android.content.Context.MODE_PRIVATE)
-//                val userName = preferences.getString("USERNAME", "Username")
-//                val email = preferences.getString("EMAIL", "Email")
-//
-//                binding.textUsername.text = userName
-//                binding.textEmail.text = email
                 val editor : SharedPreferences.Editor = preferences.edit()
                 editor.putBoolean("isLoggedIn",false)
                 editor.apply()
                 startActivity(Intent(requireActivity(), LoginRegisActivity::class.java))
                 requireActivity().finish()
-//                findNavController().navigate(R.id.action_navigation_account_to_loginRegisActivity)
             }
             alertDialog.setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
