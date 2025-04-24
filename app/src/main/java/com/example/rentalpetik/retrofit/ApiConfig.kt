@@ -8,19 +8,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
-        fun getApiService() : ApiService{
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        fun getApiService(): ApiService{
+            val loggingInterceptor =
+                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
             val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build()
+                    .addInterceptor(loggingInterceptor)
+                    .build()
 
-            return Retrofit.Builder()
-                .baseUrl("https://probne.rikpetik.site/api/v1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-                .create(ApiService::class.java)
+            val retrofit = Retrofit.Builder()
+                    .baseUrl("https://probne.rikpetik.site/api/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build()
+
+            return retrofit.create(ApiService::class.java)
         }
     }
 }

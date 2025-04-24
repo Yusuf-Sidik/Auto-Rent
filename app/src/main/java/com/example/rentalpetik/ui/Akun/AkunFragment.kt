@@ -22,9 +22,6 @@ class AkunFragment : Fragment() {
 
     private var _binding: FragmentAkunBinding? = null
     private val PICK_IMAGE_REQUEST = 1
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -32,22 +29,22 @@ class AkunFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(AkunViewModel::class.java)
 
         _binding = FragmentAkunBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textUsername
-
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Ambil data dari SharedPreferences dan tampilkan
+        val preferences : SharedPreferences = requireContext().getSharedPreferences("MYPREF", android.content.Context.MODE_PRIVATE)
+        val userName = preferences.getString("USERNAME", "Username")
+        val email = preferences.getString("EMAIL", "Email")
+
+        binding.textUsername.text = userName
+        binding.textEmail.text = email
 
         binding.imgProfile.setOnClickListener{
             openGallery()
@@ -58,12 +55,11 @@ class AkunFragment : Fragment() {
             alertDialog.setTitle("Logout")
             alertDialog.setMessage("Apakah anda ingin Logout")
             alertDialog.setPositiveButton("Iya") { dialog, which ->
-                val preferences : SharedPreferences = requireContext().getSharedPreferences("MYPREF",android.content.Context.MODE_PRIVATE)
                 val editor : SharedPreferences.Editor = preferences.edit()
                 editor.putBoolean("isLoggedIn",false)
                 editor.apply()
-
-                findNavController().navigate(R.id.action_navigation_account_to_loginRegisActivity)
+                startActivity(Intent(requireActivity(), LoginRegisActivity::class.java))
+                requireActivity().finish()
             }
             alertDialog.setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
