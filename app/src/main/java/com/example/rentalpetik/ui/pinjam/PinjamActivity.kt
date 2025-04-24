@@ -17,6 +17,7 @@ import com.example.rentalpetik.R
 import com.example.rentalpetik.databinding.ActivityPinjamBinding
 import com.example.rentalpetik.retrofit.ApiConfig
 import com.example.rentalpetik.retrofit.PeminjamanItem
+import com.example.rentalpetik.retrofit.ResponsePeminjaman
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -147,6 +148,8 @@ class PinjamActivity : AppCompatActivity() {
     private fun createPeminjaman() {
         binding.btnPinjam.isEnabled = false
         binding.progressBar.visibility = View.VISIBLE
+        val userId = intent.getIntExtra("USER_ID", 0)
+        Log.d("Peminjaman", "User ID: $userId")
         val nama = binding.edtNama.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val alamat = binding.edtAlamat.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val noTelepon = binding.edtNotelp.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
@@ -166,12 +169,12 @@ class PinjamActivity : AppCompatActivity() {
         }
 
         val call = ApiConfig.getApiService().createPeminjaman(
-            nama, alamat, noTelepon, instansi, kendaraan, kondisiKendaraan,
+            userId, nama, alamat, noTelepon, instansi, kendaraan, kondisiKendaraan,
             bensinAwal, sisaEtol, tanggalPeminjaman, ktpPart, wajahPart
         )
 
-        call.enqueue(object : Callback<List<PeminjamanItem>> {
-            override fun onResponse(call: Call<List<PeminjamanItem>>, response: Response<List<PeminjamanItem>>) {
+        call.enqueue(object : Callback<List<ResponsePeminjaman>> {
+            override fun onResponse(call: Call<List<ResponsePeminjaman>>, response: Response<List<ResponsePeminjaman>>) {
                 binding.btnPinjam.isEnabled = true
                 binding.progressBar.visibility = View.GONE
 
@@ -191,7 +194,7 @@ class PinjamActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<PeminjamanItem>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ResponsePeminjaman>>, t: Throwable) {
                 Log.e("API Error", "Request failed: ${t.localizedMessage}")
                 binding.btnPinjam.isEnabled = true
                 binding.progressBar.visibility = View.GONE

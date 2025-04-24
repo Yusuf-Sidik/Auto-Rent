@@ -5,7 +5,6 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -24,7 +23,7 @@ interface ApiService {
     @Multipart
     @POST("peminjaman/create")
     fun createPeminjaman(
-//        @Part("user_id") userId: RequestBody,
+        @Part("user_id") userId: Int,
         @Part("nama") nama: RequestBody,
         @Part("alamat") alamat: RequestBody,
         @Part("no_telepon") noTelepon: RequestBody,
@@ -36,5 +35,5 @@ interface ApiService {
         @Part("tanggal_peminjaman") tanggalPeminjaman: RequestBody,
         @Part fotoKtp: MultipartBody.Part?,
         @Part fotoWajah: MultipartBody.Part?
-    ): Call<List<PeminjamanItem>>
+    ): Call<List<ResponsePeminjaman>>
 }
