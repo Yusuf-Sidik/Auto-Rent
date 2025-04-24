@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rentalpetik.R
 import com.example.rentalpetik.databinding.FragmentAkunBinding
-import com.example.rentalpetik.ui.LoginRegist.LoginRegisActivity
 
 class AkunFragment : Fragment() {
 
